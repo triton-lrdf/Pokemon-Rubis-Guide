@@ -1,3 +1,5 @@
+import Modeles.Data;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -5,6 +7,7 @@ import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
+
 
         try {
 
@@ -15,15 +18,20 @@ public class Main {
             );
 
             Statement stmt = con.createStatement();
+            Data d = new Data(stmt) ;
+            /*
             ResultSet res = stmt.executeQuery("SELECT p.id, p.nom,elem1.nom as type1 ,elem2.nom as type2 from pokemon as p " +
                     " join element as elem1 on elem1.id = p.type1 left join element as elem2 on elem2.id = p.type2 ;");
 
             while (res.next()) {
-                System.out.println(res.getString("nom"));
+                System.out.println(res.getString("type2"));
             }
+            */
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+
 
     }
 }
