@@ -14,7 +14,7 @@ public class Data {
             ResultSet res = stm.executeQuery("SELECT p.id, p.nom,elem1.nom as type1 ,elem2.nom as type2, pv, attaque, defense, attaqueSpe, defenseSpe, vitesse from pokemon as p " +
                     " join element as elem1 on elem1.id = p.type1 left join element as elem2 on elem2.id = p.type2 ;");
 
-            pokemons = new Pokemon[9] ;
+            pokemons = new Pokemon[28] ;
             int index = 0;
             while (res.next()) {
 
@@ -30,7 +30,9 @@ public class Data {
                         res.getInt("defenseSpe"),
                         res.getInt("vitesse")
                         ) ;
-                pokemons[index] = temp;
+                if (index < pokemons.length) {
+                    pokemons[index] = temp;
+                }
                 index++;
             }
 
