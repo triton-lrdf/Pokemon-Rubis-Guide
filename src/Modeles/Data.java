@@ -43,7 +43,7 @@ public class Data {
 
     }
 
-    public String[] getNames() {
+    public String[] getNoms() {
         String[] names = new String[pokemons.length];
         for (int i = 0; i < pokemons.length; i++) {
             names[i] = pokemons[i].getNom();
@@ -70,7 +70,7 @@ public class Data {
 
     public String getInformations(String nom) {
         for (Pokemon p : pokemons) {
-            if (p.getNom().equals(nom)) {
+            if (p.getNom().equalsIgnoreCase(nom)) {
                 return p.getInformations();
             }
         }

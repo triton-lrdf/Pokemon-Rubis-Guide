@@ -1,0 +1,77 @@
+package Controleurs;
+
+import Modeles.Data;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
+// la classe va servir a centraliser les differents controlleurs
+// et garder la data qu'elle va donner aux controlleurs à chaque méthode
+public class GestionnaireControlleurs {
+
+    private Data donnees ;
+    Connection connect ;
+    ControlleurRecherche search ;
+
+    public GestionnaireControlleurs() {
+        try {
+
+            connect = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/nuzlockerrubis",
+                    "client",
+                    "JePrefereLa3G"
+            );
+
+            Statement stmt = connect.createStatement();
+            donnees = new Data(stmt) ;
+            search = new  ControlleurRecherche();
+
+        }catch (Exception e) {
+            donnees = null ;
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String getAllPokemon () {
+        return donnees.getAllPokemons() ;
+    }
+
+    public String getPokemon (int id) {
+        String res =  donnees.getInformations(id);
+        if (res != null) return res;
+        else return "Id Pokedex incorrect aucun pokemon trouvé" ;
+    }
+
+    public String getPokemon (String nom) {
+        String res = donnees.getInformations(nom);
+        if (res != null) {return res;
+        }else {
+            String[] resRech =  search.parNom(donnees, nom.toLowerCase()) ;
+            String resultat = "" ;
+            if (resRech[1] == null && resRech[0] != null) {
+                return donnees.getInformations(resRech[0]) ;
+            }
+            for (String s : resRech) {
+                if (s != null) resultat += s + "\n";
+            }
+            if (resultat.isEmpty() ) {
+                return "Aucun pokemon trouvé" ;
+            }
+            return resultat;
+        }
+
+
+    }
+
+    public String getNoms() {
+        String resultat = "";
+        for (String nom : donnees.getNoms()) {
+            resultat += nom +"\n" ;
+        }
+        return resultat;
+    }
+
+
+}
