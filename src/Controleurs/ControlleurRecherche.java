@@ -1,17 +1,19 @@
 package Controleurs;
-
 import Modeles.Data;
+
 
 public class ControlleurRecherche {
 
-    public String [] parNom (Data d, String nom ) {
+    public String [] pokeParNom (String[] noms, String chaine ) {
         String[] result = new String[10] ;
         int index = 0 ;
-        for (String pkm : d.getNoms()) {
+        for (String pkm : noms) {
             pkm = pkm.toLowerCase();
-            if (pkm.startsWith(nom) &&  index < 10) {
+            if (pkm.startsWith(chaine) &&  index < 10) {
                 result[index] = pkm;
                 index++ ;
+            }else if (index >= 10) {
+                break ;
             }
         }
 
