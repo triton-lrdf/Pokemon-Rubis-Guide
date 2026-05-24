@@ -4,8 +4,8 @@ public class Pokemon {
 
     private final int id ;
     private final String nom ;
-    private final String type1 ;
-    private final String type2 ;
+    private final Types type1 ;
+    private final Types type2 ;
     private final int pv ;
     private final int attaque ;
     private final int defense ;
@@ -13,7 +13,7 @@ public class Pokemon {
     private final int defense_spe ;
     private final int vitesse ;
 
-    public Pokemon(int id, String nom, String type1, String type2, int pv, int attaque, int defense, int attaque_spe, int defense_spe, int vitesse) {
+    public Pokemon(int id, String nom, Types type1, Types type2, int pv, int attaque, int defense, int attaque_spe, int defense_spe, int vitesse) {
         this.id = id;
         this.nom = nom;
         this.type1 = type1;

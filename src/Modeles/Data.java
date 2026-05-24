@@ -1,7 +1,6 @@
 package Modeles;
 
 import java.sql.ResultSet;
-import java.sql.SQLOutput;
 import java.sql.Statement;
 
 public class Data {
@@ -11,8 +10,7 @@ public class Data {
     public Data(Statement stm) {
         // On repure toutes les infos des pokemons de la generation
         try {
-            ResultSet res = stm.executeQuery("SELECT p.id, p.nom,elem1.nom as type1 ,elem2.nom as type2, pv, attaque, defense, attaqueSpe, defenseSpe, vitesse from pokemon as p " +
-                    " join element as elem1 on elem1.id = p.type1 left join element as elem2 on elem2.id = p.type2 ;");
+            ResultSet res = stm.executeQuery("SELECT p.id, p.nom, type1, type2, pv, attaque, defense, attaqueSpe, defenseSpe, vitesse from pokemon as p ");
 
             pokemons = new Pokemon[28] ;
             int index = 0;
@@ -21,8 +19,8 @@ public class Data {
                 Pokemon temp = new Pokemon(
                         res.getInt("id"),
                         res.getString("nom"),
-                        res.getString("type1"),
-                        res.getString("type2"),
+                        Types.getType(res.getInt("type1")),
+                        Types.getType(res.getInt("type2")),
                         res.getInt("pv"),
                         res.getInt("attaque"),
                         res.getInt("defense"),
