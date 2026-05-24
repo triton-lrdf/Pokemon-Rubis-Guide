@@ -48,7 +48,7 @@ public class GestionnaireControlleurs {
         String res = donnees.getInformations(nom);
         if (res != null) {return res;
         }else {
-            String[] resRech =  search.parNom(donnees, nom.toLowerCase()) ;
+            String[] resRech =  search.pokeParNom(donnees.getNoms(), nom.toLowerCase()) ;
             String resultat = "" ;
             if (resRech[1] == null && resRech[0] != null) {
                 return donnees.getInformations(resRech[0]) ;
