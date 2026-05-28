@@ -11,6 +11,7 @@ public class Main {
 
         GestionnaireControlleurs g = new GestionnaireControlleurs();
         System.out.println(g.getNoms()) ;
+        System.out.println(g.getCapacites());
 
 
 

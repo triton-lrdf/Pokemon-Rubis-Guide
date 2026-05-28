@@ -66,12 +66,20 @@ public class GestionnaireControlleurs {
     }
 
     public String getNoms() {
-        String resultat = "";
+        StringBuilder resultat = new StringBuilder();
         for (String nom : donnees.getNoms()) {
-            resultat += nom +"\n" ;
+            resultat.append(nom).append("\n");
         }
-        return resultat;
+        return resultat.toString();
     }
 
+
+    public String getCapacites() {
+        StringBuilder resultat = new StringBuilder();
+        for (String cap : donnees.getCapacites()) {
+            resultat.append(cap).append("\n");
+        }
+        return resultat.toString();
+    }
 
 }
