@@ -106,7 +106,7 @@ public class Data {
                         res.getInt("puissance"),
                         res.getInt("prec"),
                         res.getString("categorie").charAt(0),
-                        Types.getType(res.getInt("type2"))
+                        Types.getType(res.getInt("elem"))
                 ) ;
                 if (index < capacites.length) {
                     capacites[index] = temp;
