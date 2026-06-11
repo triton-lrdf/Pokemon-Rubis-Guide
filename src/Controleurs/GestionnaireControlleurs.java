@@ -35,16 +35,19 @@ public class GestionnaireControlleurs {
     }
 
     public String getAllPokemon () {
+        System.out.println("voici les informations de base des pokemons de cette generation ");
         return donnees.getAllPokemons() ;
     }
 
     public String getPokemon (int id) {
+        System.out.println("recherche du pokemon par son id");
         String res =  donnees.getInformations(id);
         if (res != null) return res;
         else return "Id Pokedex incorrect aucun pokemon trouvé" ;
     }
 
     public String getPokemon (String nom) {
+        System.out.println("recherche du pokemon par son nom");
         String res = donnees.getInformations(nom);
         if (res != null) {return res;
         }else {
@@ -66,6 +69,7 @@ public class GestionnaireControlleurs {
     }
 
     public String getNoms() {
+        System.out.println("Voici les pokemons disponibles dans cette generation :");
         StringBuilder resultat = new StringBuilder();
         for (String nom : donnees.getNoms()) {
             resultat.append(nom).append("\n");

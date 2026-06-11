@@ -2,6 +2,7 @@ package Modeles;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.ResultSet;
+import java.sql.SQLOutput;
 import java.sql.Statement;
 
 public class Data {
@@ -30,11 +31,11 @@ public class Data {
     }
 
     public String getAllPokemons() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (Pokemon p : pokemons) {
-            res += p.getInformations() + "\n";
+            res.append(p.getInformations()).append("\n");
         }
-        return res;
+        return res.toString();
     }
 
     public String getInformations(int id) {
