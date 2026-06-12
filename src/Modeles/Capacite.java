@@ -28,4 +28,11 @@ public class Capacite {
     public String getNom() {
         return nom;
     }
+
+    public String inline() {
+        return nom +" Puiss :"+puissance +" Prec  :"+precision +" type :"+type ;
+    }
+
+
+
 }

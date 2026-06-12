@@ -42,6 +42,23 @@ public class Pokemon {
         return result;
     }
 
+    public String getInformations (int niveau) {
+
+        String result = "" ;
+        result += nom +" "+niveau+"\n";
+        result += "type : " +type1 ;
+        if (type2 != null) result += " "+type2 ;
+        result += '\n';
+        result += "pv : "+pv +'\n';
+        result += "attaque : "+attaque +'\n';
+        result += "deffense : "+defense +'\n';
+        result += "attaque spe : "+attaque_spe +'\n';
+        result += "deffense spe : "+defense_spe +'\n';
+        result += "vitesse : "+vitesse +'\n';
+
+        return result;
+    }
+
 
     public int getId() {
         return id;

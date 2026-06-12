@@ -133,6 +133,12 @@ public class Data {
     }
 
 
-
+    public String getListeRoute() {
+        StringBuilder res = new StringBuilder();
+        for (Lieu l : lieux) {
+            res.append(l.toString()).append("\n");
+        }
+        return  res.toString();
+    }
 
 }

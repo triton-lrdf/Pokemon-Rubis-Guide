@@ -92,14 +92,12 @@ public class GestionnaireControlleurs {
     }
 
     public String getLieux () {
-        return "" ;
+        return donnees.getListeRoute() ;
     }
 
     public String getDresseur(String nom) {
         return "" ;
     }
-
-
 
 
 
