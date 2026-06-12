@@ -9,6 +9,8 @@ public class Data {
 
     private Pokemon[] pokemons;
     private Capacite[] capacites;
+    private Lieu[] lieux ;
+
 
     public Data(Statement stm) {
         // On repure toutes les infos des pokemons de la generation
@@ -18,7 +20,6 @@ public class Data {
         if (!loadCapacite(stm)) {
             System.out.println("Erreur de lecture de capacite");
         }
-
 
     }
 
@@ -130,6 +131,8 @@ public class Data {
         }
         return res;
     }
+
+
 
 
 }

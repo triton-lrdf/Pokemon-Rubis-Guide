@@ -52,17 +52,17 @@ public class GestionnaireControlleurs {
         if (res != null) {return res;
         }else {
             String[] resRech =  search.pokeParNom(donnees.getNoms(), nom.toLowerCase()) ;
-            String resultat = "" ;
+            StringBuilder resultat = new StringBuilder();
             if (resRech[1] == null && resRech[0] != null) {
                 return donnees.getInformations(resRech[0]) ;
             }
             for (String s : resRech) {
-                if (s != null) resultat += s + "\n";
+                if (s != null) resultat.append(s).append("\n");
             }
-            if (resultat.isEmpty() ) {
+            if (resultat.isEmpty()) {
                 return "Aucun pokemon trouvé" ;
             }
-            return resultat;
+            return resultat.toString();
         }
 
 
@@ -85,5 +85,22 @@ public class GestionnaireControlleurs {
         }
         return resultat.toString();
     }
+
+
+    public String getDresseurs () {
+        return "" ;
+    }
+
+    public String getLieux () {
+        return "" ;
+    }
+
+    public String getDresseur(String nom) {
+        return "" ;
+    }
+
+
+
+
 
 }

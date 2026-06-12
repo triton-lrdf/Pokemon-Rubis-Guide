@@ -25,7 +25,7 @@ public class VueConsole {
                 System.out.println(gc.getAllPokemon());
 
             }if (cmd.contains("capacité")) {
-                System.out.println(CmdCapacite(gc,cmd)) ;
+                System.out.println(cmdCapacite(gc,cmd)) ;
 
             }else if (cmd.contains("capacités")) {
                 System.out.println(gc.getCapacites()) ;
@@ -37,7 +37,7 @@ public class VueConsole {
                 System.out.println(gc.getDresseurs());
 
             }if (cmd.contains("lieu")) {
-                System.out.println(cmd(gc,cmd)) ;
+                System.out.println(cmdLieu(gc,cmd)) ;
 
             }else if (cmd.contains("lieux")) {
                 System.out.println(gc.getLieux());
@@ -58,6 +58,18 @@ public class VueConsole {
             System.out.println();
             System.out.println("saisir 'q'ou 'quit' pour quitter 'ls' pour la liste des commandes disponibles");
         }
+    }
+
+    private String cmdDresseur(GestionnaireControlleurs gc, String cmd) {
+        return "" ;
+    }
+
+    private String cmdCapacite(GestionnaireControlleurs gc, String cmd) {
+        return "" ;
+    }
+
+    private String cmdLieu(GestionnaireControlleurs gc, String cmd) {
+        return "" ;
     }
 
     private String cmdPokemon (GestionnaireControlleurs gc, String nom) {
