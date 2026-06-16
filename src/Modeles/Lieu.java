@@ -1,7 +1,5 @@
 package Modeles;
 
-import java.util.ArrayList;
-
 public class Lieu {
 
     private final String nom;

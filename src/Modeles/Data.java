@@ -1,10 +1,7 @@
 package Modeles;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.ResultSet;
-import java.sql.SQLOutput;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class Data {
 
@@ -153,7 +150,7 @@ public class Data {
 
         }
         // a voir
-        return "dresseur/se non trouvé(e)" ;
+        return null ;
 
     }
 }

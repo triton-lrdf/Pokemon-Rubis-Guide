@@ -1,8 +1,6 @@
 package Controleurs;
 
 
-import Modeles.Dresseur;
-
 public class ControlleurRecherche {
 
     public String [] parNom (String[] noms, String chaine ) {

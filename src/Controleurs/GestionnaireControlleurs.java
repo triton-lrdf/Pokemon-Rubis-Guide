@@ -1,10 +1,8 @@
 package Controleurs;
 
 import Modeles.Data;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 // la classe va servir a centraliser les differents controlleurs
@@ -98,21 +96,10 @@ public class GestionnaireControlleurs {
     public String getDresseur(String nom) {
         System.out.println("recherche du dresseur par son nom");
         String res = donnees.getDresseur(nom) ;
-        if (res != null) {return res;
-        }else {
-            String[] resRech =  search.parNom(donnees.getNoms(), nom.toLowerCase()) ;
-            StringBuilder resultat = new StringBuilder();
-            if (resRech[1] == null && resRech[0] != null) {
-                return donnees.getInformations(resRech[0]) ;
-            }
-            for (String s : resRech) {
-                if (s != null) resultat.append(s).append("\n");
-            }
-            if (resultat.isEmpty()) {
-                return "Aucun pokemon trouvé" ;
-            }
-            return resultat.toString();
+        if (res == null ) {
+            System.out.println("aucun dresseur trouvé");
         }
+        return res ;
     }
 
 
