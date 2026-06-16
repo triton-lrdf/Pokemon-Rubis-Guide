@@ -1,5 +1,7 @@
 package Modeles;
 
+import java.util.ArrayList;
+
 public class Lieu {
 
     private final String nom;
@@ -23,8 +25,14 @@ public class Lieu {
     }
 
 
-
-
+    public Dresseur getDresseurs(String nom) {
+        for (Dresseur d : combats) {
+            if (d.getNom().equals(nom)) {
+                return d ;
+            }
+        }
+        return null ;
+    }
 
 
 }

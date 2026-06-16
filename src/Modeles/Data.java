@@ -4,6 +4,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.ResultSet;
 import java.sql.SQLOutput;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Data {
 
@@ -141,4 +142,18 @@ public class Data {
         return  res.toString();
     }
 
+    public String getDresseur(String nom) {
+        Dresseur resultat ;
+        for (Lieu l : lieux) {
+
+            resultat = l.getDresseurs(nom) ;
+            if (resultat != null) {
+                return resultat.getNom();
+            }
+
+        }
+        // a voir
+        return "dresseur/se non trouvé(e)" ;
+
+    }
 }

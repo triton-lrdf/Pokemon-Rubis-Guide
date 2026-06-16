@@ -1,10 +1,11 @@
 package Controleurs;
 
 
+import Modeles.Dresseur;
 
 public class ControlleurRecherche {
 
-    public String [] pokeParNom (String[] noms, String chaine ) {
+    public String [] parNom (String[] noms, String chaine ) {
         String[] result = new String[10] ;
         int index = 0 ;
         for (String pkm : noms) {
@@ -19,7 +20,6 @@ public class ControlleurRecherche {
 
         return result;
     }
-
 
 
 

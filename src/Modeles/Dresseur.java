@@ -32,8 +32,7 @@ public class Dresseur {
     }
 
 
-
-
-
-
+    public String getNom() {
+        return nom ;
+    }
 }

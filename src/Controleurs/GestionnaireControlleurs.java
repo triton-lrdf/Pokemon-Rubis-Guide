@@ -51,7 +51,7 @@ public class GestionnaireControlleurs {
         String res = donnees.getInformations(nom);
         if (res != null) {return res;
         }else {
-            String[] resRech =  search.pokeParNom(donnees.getNoms(), nom.toLowerCase()) ;
+            String[] resRech =  search.parNom(donnees.getNoms(), nom.toLowerCase()) ;
             StringBuilder resultat = new StringBuilder();
             if (resRech[1] == null && resRech[0] != null) {
                 return donnees.getInformations(resRech[0]) ;
@@ -96,8 +96,26 @@ public class GestionnaireControlleurs {
     }
 
     public String getDresseur(String nom) {
-        return "" ;
+        System.out.println("recherche du dresseur par son nom");
+        String res = donnees.getDresseur(nom) ;
+        if (res != null) {return res;
+        }else {
+            String[] resRech =  search.parNom(donnees.getNoms(), nom.toLowerCase()) ;
+            StringBuilder resultat = new StringBuilder();
+            if (resRech[1] == null && resRech[0] != null) {
+                return donnees.getInformations(resRech[0]) ;
+            }
+            for (String s : resRech) {
+                if (s != null) resultat.append(s).append("\n");
+            }
+            if (resultat.isEmpty()) {
+                return "Aucun pokemon trouvé" ;
+            }
+            return resultat.toString();
+        }
     }
+
+
 
 
 
