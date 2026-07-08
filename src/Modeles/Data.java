@@ -153,4 +153,17 @@ public class Data {
         return null ;
 
     }
+
+    public String getAllCapacites() {
+        StringBuilder res = new StringBuilder();
+        for (Capacite c : capacites) {
+            res.append(c.inline()).append("\n");
+        }
+        return  res.toString();
+    }
+
+
+
+
+
 }

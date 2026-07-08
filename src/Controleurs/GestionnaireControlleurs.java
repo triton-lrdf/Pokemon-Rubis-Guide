@@ -84,14 +84,15 @@ public class GestionnaireControlleurs {
         return resultat.toString();
     }
 
+    public String getAllCapacites() {
+        return donnees.getAllCapacites() ;
+    }
 
     public String getDresseurs () {
         return "" ;
     }
 
-    public String getLieux () {
-        return donnees.getListeRoute() ;
-    }
+    public String getLieux () {return "les routes :" + donnees.getListeRoute() ;}
 
     public String getDresseur(String nom) {
         System.out.println("recherche du dresseur par son nom");

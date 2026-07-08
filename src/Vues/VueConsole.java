@@ -24,30 +24,35 @@ public class VueConsole {
             }else if (cmd.contains("pokedex")) {
                 System.out.println(gc.getAllPokemon());
 
-            }if (cmd.contains("capacité")) {
+            }else if (cmd.contains("capacites")) {
+                System.out.println(gc.getAllCapacites()) ;
+
+            }else if (cmd.contains("capacite")) {
                 System.out.println(cmdCapacite(gc,cmd)) ;
-
-            }else if (cmd.contains("capacités")) {
-                System.out.println(gc.getCapacites()) ;
-
-            }if (cmd.contains("dresseur")) {
-                System.out.println(cmdDresseur(gc,cmd)) ;
 
             }else if (cmd.contains("dresseurs")) {
                 System.out.println(gc.getDresseurs());
 
-            }if (cmd.contains("lieu")) {
-                System.out.println(cmdLieu(gc,cmd)) ;
+            }else if (cmd.contains("dresseur")) {
+                System.out.println(cmdDresseur(gc,cmd)) ;
 
             }else if (cmd.contains("lieux")) {
                 System.out.println(gc.getLieux());
 
+            }else if (cmd.contains("lieu")) {
+                System.out.println(cmdLieu(gc,cmd)) ;
+
+
             } else if (cmd.contains("ls")) {
                 System.out.println("voici les commandes disponibles, merci de respecter les écarts entre les elements");
-                System.out.println("help -nom de la classe-");
-                System.out.println("la commande sans nom de classe permet d'afficher la liste des classes disponibles");
-                System.out.println("l'option syntax de la classe donne la syntaxe de creation avec les méthodes ") ;
-                System.out.println("et vous montre un exemple");
+                System.out.println("pokemon -nom du pokemon-");
+                System.out.println("la commande sans nom de classe permet d'afficher la liste des pokemons disponibles");
+                System.out.println("pokedex ") ;
+                System.out.println("Liste l'entiereté des pokemons avec les informations de base");
+                System.out.println("capacite -nom de la capacite ") ;
+                System.out.println("capacites ") ;
+                System.out.println("renvoie la liste des capacites avec les informations de base") ;
+                System.out.println("cela fontionne de la meme facon pour 'dresseur(s)' et 'lieu(x)' ") ;
             } else if (cmd.contains("quit") || cmd.contains("q")) {
                 console.close();
                 return;
@@ -65,8 +70,37 @@ public class VueConsole {
     }
 
     private String cmdCapacite(GestionnaireControlleurs gc, String cmd) {
-        return "" ;
+        if (cmd.length() > 8 ) {
+            String poke = cmd.split(" ")[1];
+            boolean chiffre = false ;
+            boolean lettre = false ;
+            // on va faire une boucle et chercher chiffres comme lettres si on trouve les deux on refuses
+            // si on en trouve 1 des deux on utilise le type qu'on a trouvé pour la recherche
+            for (int i =0 ; i < poke.length() ; i++) {
+                if (Character.isDigit(poke.charAt(i))) {
+                    chiffre = true ;
+                }else if (Character.isAlphabetic(poke.charAt(i))) {
+                    lettre = true ;
+                }
+                if (lettre && chiffre) {
+                    System.out.println("Erreur dans la saisie veuillez ne pas melanger chiffres et lettres");
+                    return "" ;
+                }
+            }
+
+            if (chiffre) {
+                return (gc.getPokemon(Integer.parseInt(poke)) );
+            }else if (lettre) {
+                return (gc.getPokemon(poke) );
+            }else {
+                return "erreur numero pokedex ou nom de pokemon incorrect" ;
+            }
+        }else {
+            return (gc.getCapacites() ) ;
+        }
+
     }
+
 
     private String cmdLieu(GestionnaireControlleurs gc, String cmd) {
         return "" ;

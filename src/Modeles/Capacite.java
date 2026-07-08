@@ -30,7 +30,7 @@ public class Capacite {
     }
 
     public String inline() {
-        return nom +" Puiss :"+puissance +" Prec  :"+precision +" type :"+type ;
+        return nom +" | puiss : "+puissance +" | prec : "+precision +" | type : "+type ;
     }
 
 
