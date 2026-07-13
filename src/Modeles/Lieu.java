@@ -6,6 +6,7 @@ public class Lieu {
     private final Dresseur [] combats ;
     private final Pokemon [] rencontres = null;
     private final float[] taux = null;
+    private final String details = null ;
     // manque les pokemon et leur taux pour ca c cho
     // je peux tenter de remettre des pointeurs et faire un tableau associé pour les taux
     // ou je peux enregistrer juste leur numeros ID

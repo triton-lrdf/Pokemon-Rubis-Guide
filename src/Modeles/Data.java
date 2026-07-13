@@ -21,39 +21,6 @@ public class Data {
 
     }
 
-    public String[] getNoms() {
-        String[] names = new String[pokemons.length];
-        for (int i = 0; i < pokemons.length; i++) {
-            names[i] = pokemons[i].getNom();
-        }
-        return names;
-    }
-
-    public String getAllPokemons() {
-        StringBuilder res = new StringBuilder();
-        for (Pokemon p : pokemons) {
-            res.append(p.getInformations()).append("\n");
-        }
-        return res.toString();
-    }
-
-    public String getInformations(int id) {
-        for (Pokemon p : pokemons) {
-            if (p.getId() == id) {
-                return p.getInformations();
-            }
-        }
-        return null ;
-    }
-
-    public String getInformations(String nom) {
-        for (Pokemon p : pokemons) {
-            if (p.getNom().equalsIgnoreCase(nom)) {
-                return p.getInformations();
-            }
-        }
-        return null ;
-    }
 
     private boolean loadPokemons(Statement stm) {
         try {
@@ -122,6 +89,10 @@ public class Data {
 
     }
 
+    private boolean loadLieux(Statement stm) {
+        return true ;
+    }
+
     public String[] getCapacites() {
         String[] res = new String[capacites.length];
         for (int i = 0; i < capacites.length; i++) {
@@ -129,7 +100,6 @@ public class Data {
         }
         return res;
     }
-
 
     public String getListeRoute() {
         StringBuilder res = new StringBuilder();
@@ -162,6 +132,39 @@ public class Data {
         return  res.toString();
     }
 
+    public String[] getNoms() {
+        String[] names = new String[pokemons.length];
+        for (int i = 0; i < pokemons.length; i++) {
+            names[i] = pokemons[i].getNom();
+        }
+        return names;
+    }
+
+    public String getAllPokemons() {
+        StringBuilder res = new StringBuilder();
+        for (Pokemon p : pokemons) {
+            res.append(p.getInformations()).append("\n");
+        }
+        return res.toString();
+    }
+
+    public String getInformations(int id) {
+        for (Pokemon p : pokemons) {
+            if (p.getId() == id) {
+                return p.getInformations();
+            }
+        }
+        return null ;
+    }
+
+    public String getInformations(String nom) {
+        for (Pokemon p : pokemons) {
+            if (p.getNom().equalsIgnoreCase(nom)) {
+                return p.getInformations();
+            }
+        }
+        return null ;
+    }
 
 
 
