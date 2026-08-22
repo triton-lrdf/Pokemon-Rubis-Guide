@@ -4,23 +4,23 @@ public class Lieu {
 
     private final String nom;
     private final Dresseur [] combats ;
-    private final Pokemon [] rencontres = null;
-    private final float[] taux = null;
-    private final String details = null ;
-    // manque les pokemon et leur taux pour ca c cho
-    // je peux tenter de remettre des pointeurs et faire un tableau associé pour les taux
-    // ou je peux enregistrer juste leur numeros ID
+    private final Rencontre [] rencontres ;
 
-    public Lieu(String nom, Dresseur [] combats ) {
-        this.nom = nom; this.combats = combats;
+
+    public Lieu(String nom, Dresseur [] combats, Rencontre [] rencontres) {
+        this.nom = nom; this.combats = combats; this.rencontres = rencontres;
 
     }
 
     public String toString() {
-        StringBuilder result = new StringBuilder(nom + " ");
-
+        StringBuilder result = new StringBuilder(nom + "\n");
+        result.append("Rencontres: \n");
+        for  (Rencontre rencontre : rencontres) {
+            result.append(rencontre.getInfo());
+        }
+        result.append("Combats : \n");
         for (Dresseur d : combats) {
-            result.append(d.getInfoRoute());
+            result.append(d.getInfoRoute()).append("\n");
         }
 
         return result.toString();

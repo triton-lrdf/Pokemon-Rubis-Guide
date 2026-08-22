@@ -42,6 +42,12 @@ public class VueConsole {
             }else if (cmd.contains("lieu")) {
                 System.out.println(cmdLieu(gc,cmd)) ;
 
+            }else if (cmd.contains("rencontres")) {
+                System.out.println(gc.getAllRencontres()) ;
+
+            }else if (cmd.contains("rencontre")) {
+                System.out.println(cmdRencontres(gc,cmd)) ;
+
 
             } else if (cmd.contains("ls")) {
                 System.out.println("voici les commandes disponibles, merci de respecter les écarts entre les elements");
@@ -70,33 +76,19 @@ public class VueConsole {
     }
 
     private String cmdCapacite(GestionnaireControlleurs gc, String cmd) {
-        if (cmd.length() > 8 ) {
-            String poke = cmd.split(" ")[1];
-            boolean chiffre = false ;
-            boolean lettre = false ;
-            // on va faire une boucle et chercher chiffres comme lettres si on trouve les deux on refuses
-            // si on en trouve 1 des deux on utilise le type qu'on a trouvé pour la recherche
-            for (int i =0 ; i < poke.length() ; i++) {
-                if (Character.isDigit(poke.charAt(i))) {
-                    chiffre = true ;
-                }else if (Character.isAlphabetic(poke.charAt(i))) {
-                    lettre = true ;
-                }
-                if (lettre && chiffre) {
-                    System.out.println("Erreur dans la saisie veuillez ne pas melanger chiffres et lettres");
-                    return "" ;
-                }
-            }
+        if (cmd.length() > 10 ) {
+            String capapcite = cmd.split(" ")[1];
 
-            if (chiffre) {
-                return (gc.getPokemon(Integer.parseInt(poke)) );
-            }else if (lettre) {
-                return (gc.getPokemon(poke) );
-            }else {
-                return "erreur numero pokedex ou nom de pokemon incorrect" ;
-            }
+                for (Character c : capapcite.toCharArray()) {
+                    if (Character.isDigit(c)) {
+                        return "erreur, vous avez inséré un chiffre dans votre recherche" ;
+                    }
+                }
+
+                return (gc.getCapacite(capapcite) );
+
         }else {
-            return (gc.getCapacites() ) ;
+            return gc.getAllCapacites() ;
         }
 
     }
@@ -136,6 +128,10 @@ public class VueConsole {
             return (gc.getNoms()) ;
         }
 
+    }
+
+    public String cmdRencontres (GestionnaireControlleurs gc, String cmd) {
+        return "" ;
     }
 
 }

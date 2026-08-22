@@ -1,5 +1,6 @@
 package Controleurs;
 
+import Modeles.Capacite;
 import Modeles.Data;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -76,12 +77,8 @@ public class GestionnaireControlleurs {
     }
 
 
-    public String getCapacites() {
-        StringBuilder resultat = new StringBuilder();
-        for (String cap : donnees.getCapacites()) {
-            resultat.append(cap).append("\n");
-        }
-        return resultat.toString();
+    public String getCapacite(String nom) {
+        return "" ;
     }
 
     public String getAllCapacites() {
@@ -103,7 +100,13 @@ public class GestionnaireControlleurs {
         return res ;
     }
 
+    public String getRencontre (boolean type, String nom) {
+        return "" ;
+    }
 
+    public String getAllRencontres () {
+        return donnees.getAllRencontres() ;
+    }
 
 
 

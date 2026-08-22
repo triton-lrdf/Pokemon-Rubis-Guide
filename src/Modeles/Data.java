@@ -8,17 +8,52 @@ public class Data {
     private Pokemon[] pokemons;
     private Capacite[] capacites;
     private Lieu[] lieux ;
-
+    private Rencontre[] rencontres;
 
     public Data(Statement stm) {
         // On repure toutes les infos des pokemons de la generation
         if (! loadPokemons(stm)) {
-            System.out.println("Erreur de lecture de pokemons");
+            System.out.println("Erreur de lecture des pokemons");
         }
         if (!loadCapacite(stm)) {
-            System.out.println("Erreur de lecture de capacite");
+            System.out.println("Erreur de lecture des capacites");
+        }
+        if (!loadRencontres(stm)) {
+            System.out.println("Erreur de lecture des rencontres");
         }
 
+    }
+
+    // LES CHARGEMENTS
+
+    public Boolean loadRencontres( Statement stm) {
+        try{
+
+            ResultSet res  = stm.executeQuery("select count(*) from tauxroutes");
+            res.next();
+            rencontres = new Rencontre[res.getInt(1)];
+            res = stm.executeQuery("select p.nom, l.nom as lieu, t.niveau, t.taux, t.details from tauxroutes as t join Pokemon as p on idPoke = id join lieu as l on l.id = t.idLieu  order by 2;");
+            int index = 0;
+            while (res.next()) {
+
+                Rencontre temp = new Rencontre(
+                        res.getString("nom"),
+                        res.getString("lieu"),
+                        res.getInt("niveau"),
+                        res.getInt("taux"),
+                        res.getString("details")
+                ) ;
+                if (index < rencontres.length) {
+                    rencontres[index] = temp;
+                }
+                index++;
+            }
+            return true ;
+
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
 
@@ -93,6 +128,9 @@ public class Data {
         return true ;
     }
 
+
+    // LES RETOURS
+
     public String[] getCapacites() {
         String[] res = new String[capacites.length];
         for (int i = 0; i < capacites.length; i++) {
@@ -166,6 +204,13 @@ public class Data {
         return null ;
     }
 
+    public String getAllRencontres() {
+        StringBuilder res = new StringBuilder();
+        for (Rencontre r : rencontres) {
+            res.append(r.getInfo()).append("\n");
+        }
+        return  res.toString();
+    }
 
 
 
