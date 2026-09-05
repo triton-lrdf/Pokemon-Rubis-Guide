@@ -1,6 +1,5 @@
 package Controleurs;
 
-import Modeles.Capacite;
 import Modeles.Data;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,7 +49,7 @@ public class GestionnaireControlleurs {
         String res = donnees.getInformations(nom);
         if (res != null) {return res;
         }else {
-            String[] resRech =  search.parNom(donnees.getNoms(), nom.toLowerCase()) ;
+            String[] resRech =  search.parNom(donnees.getNomsPoke(), nom.toLowerCase()) ;
             StringBuilder resultat = new StringBuilder();
             if (resRech[1] == null && resRech[0] != null) {
                 return donnees.getInformations(resRech[0]) ;
@@ -68,9 +67,9 @@ public class GestionnaireControlleurs {
     }
 
     public String getNoms() {
-        System.out.println("Voici les pokemons disponibles dans cette generation :");
-        StringBuilder resultat = new StringBuilder();
-        for (String nom : donnees.getNoms()) {
+
+        StringBuilder resultat = new StringBuilder("Voici les pokemons disponibles dans cette generation : \n");
+        for (String nom : donnees.getNomsPoke()) {
             resultat.append(nom).append("\n");
         }
         return resultat.toString();
@@ -78,11 +77,24 @@ public class GestionnaireControlleurs {
 
 
     public String getCapacite(String nom) {
-        return "" ;
+        String [] trouves = search.parNom(donnees.getNomCapacites(),nom) ;
+        if (trouves[0] == null) {
+            return "aucune capacité trouvée" ;
+        }
+        if (trouves[0] != null && trouves[1] == null) {
+            return trouves[0] ;
+        }
+
+        StringBuilder resultat = new StringBuilder();
+        for (String s : trouves) {
+            if (s != null) resultat.append(s).append("\n");
+        }
+        return resultat.toString();
     }
 
     public String getAllCapacites() {
-        return donnees.getAllCapacites() ;
+
+        return "voici les capacites disponibles dans cette generation : \n" + donnees.getAllCapacites() ;
     }
 
     public String getDresseurs () {
@@ -106,6 +118,10 @@ public class GestionnaireControlleurs {
 
     public String getAllRencontres () {
         return donnees.getAllRencontres() ;
+    }
+
+    public String getInfoDresseurs () {
+        return donnees.getInfoDresseur() ;
     }
 
 

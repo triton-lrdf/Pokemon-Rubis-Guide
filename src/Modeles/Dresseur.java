@@ -13,7 +13,7 @@ public class Dresseur {
         result.append(position).append("\n");
         result.append("Equipe : " + "\n");
         for (PokeDresseur p : equipe) {
-            result.append(p.toString()).append("\n");
+            result.append( p==null ?"" : (p.toString()+"\n"));
         }
 
         return result.toString();
@@ -22,13 +22,13 @@ public class Dresseur {
     public int getNivMax () {
         int max = 0 ;
         for  (PokeDresseur p : equipe ) {
-            if (p.getNiveau() > max) max= p.getNiveau() ;
+            if (p != null && p.getNiveau() > max) max= p.getNiveau() ;
         }
         return max ;
     }
 
     public  String getInfoRoute () {
-        return nom + " de niveau max : " + getNivMax() + position;
+        return nom + " de niveau max : " + getNivMax() +" "+ position;
     }
 
 

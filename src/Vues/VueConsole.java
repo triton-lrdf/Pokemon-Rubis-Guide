@@ -15,6 +15,7 @@ public class VueConsole {
         Scanner console = new Scanner(System.in);
         System.out.println("\n" + "Commandes consoles :");
         System.out.println("saisir 'q'ou 'quit' pour quitter 'ls' pour la liste des commandes disponibles");
+        System.out.println(gc.getInfoDresseurs());
         while (console.hasNextLine()) {
 
             String cmd = console.nextLine().toLowerCase().trim();
@@ -76,7 +77,7 @@ public class VueConsole {
     }
 
     private String cmdCapacite(GestionnaireControlleurs gc, String cmd) {
-        if (cmd.length() > 10 ) {
+        if (cmd.length() >= 10 ) {
             String capapcite = cmd.split(" ")[1];
 
                 for (Character c : capapcite.toCharArray()) {

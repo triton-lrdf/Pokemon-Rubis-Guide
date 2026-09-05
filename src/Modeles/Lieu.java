@@ -4,20 +4,15 @@ public class Lieu {
 
     private final String nom;
     private final Dresseur [] combats ;
-    private final Rencontre [] rencontres ;
 
 
-    public Lieu(String nom, Dresseur [] combats, Rencontre [] rencontres) {
-        this.nom = nom; this.combats = combats; this.rencontres = rencontres;
+    public Lieu(String nom, Dresseur [] combats ) {
+        this.nom = nom; this.combats = combats; ;
 
     }
 
     public String toString() {
         StringBuilder result = new StringBuilder(nom + "\n");
-        result.append("Rencontres: \n");
-        for  (Rencontre rencontre : rencontres) {
-            result.append(rencontre.getInfo());
-        }
         result.append("Combats : \n");
         for (Dresseur d : combats) {
             result.append(d.getInfoRoute()).append("\n");
