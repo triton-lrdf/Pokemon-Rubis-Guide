@@ -8,21 +8,22 @@ public class Rencontre {
     private final int taux ;
     private final String detail ;
 
-    Rencontre(String poke,String lieu, int niveau, int taux, String details) {
+    public Rencontre(String poke,String lieu, int niveau, int taux, String details) {
         espece = poke ; this.lieu = lieu ; this.taux = taux; this.detail = details; this.niveau = niveau;
     }
 
-    String getInfo() {
+    public String getInfo() {
         return espece + " | " + lieu + " | niv " + niveau+" | " + taux + "% | " + detail;
     }
 
-    Boolean especePoke(String poke) {
-        return espece == poke;
-    }
+    public boolean especePoke(String poke) {return espece.equalsIgnoreCase(poke);}
 
-    String getEspece() {
+    public String getEspece() {
         return espece ;
     }
 
+    public boolean isIn(String l){return  lieu.equalsIgnoreCase(l);}
+
+    public String getInfoRoute() {return espece + " | " + taux + "% "+ detail ;}
 
 }

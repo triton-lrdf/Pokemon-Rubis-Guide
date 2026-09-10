@@ -15,11 +15,10 @@ public class VueConsole {
         Scanner console = new Scanner(System.in);
         System.out.println("\n" + "Commandes consoles :");
         System.out.println("saisir 'q'ou 'quit' pour quitter 'ls' pour la liste des commandes disponibles");
-        System.out.println(gc.getInfoDresseurs());
         while (console.hasNextLine()) {
 
             String cmd = console.nextLine().toLowerCase().trim();
-            if (cmd.contains("pokemon")) {
+            if (cmd.contains("pokemon ")) {
                 System.out.println(cmdPokemon(gc,cmd)) ;
 
             }else if (cmd.contains("pokedex")) {
@@ -28,25 +27,25 @@ public class VueConsole {
             }else if (cmd.contains("capacites")) {
                 System.out.println(gc.getAllCapacites()) ;
 
-            }else if (cmd.contains("capacite")) {
+            }else if (cmd.contains("capacite ")) {
                 System.out.println(cmdCapacite(gc,cmd)) ;
 
             }else if (cmd.contains("dresseurs")) {
                 System.out.println(gc.getDresseurs());
 
-            }else if (cmd.contains("dresseur")) {
+            }else if (cmd.contains("dresseur ")) {
                 System.out.println(cmdDresseur(gc,cmd)) ;
 
             }else if (cmd.contains("lieux")) {
                 System.out.println(gc.getLieux());
 
-            }else if (cmd.contains("lieu")) {
+            }else if (cmd.contains("lieu ")) {
                 System.out.println(cmdLieu(gc,cmd)) ;
 
             }else if (cmd.contains("rencontres")) {
                 System.out.println(gc.getAllRencontres()) ;
 
-            }else if (cmd.contains("rencontre")) {
+            }else if (cmd.contains("rencontre ")) {
                 System.out.println(cmdRencontres(gc,cmd)) ;
 
 
@@ -77,7 +76,7 @@ public class VueConsole {
     }
 
     private String cmdCapacite(GestionnaireControlleurs gc, String cmd) {
-        if (cmd.length() >= 10 ) {
+        if (cmd.length() >= 10) {
             String capapcite = cmd.split(" ")[1];
 
                 for (Character c : capapcite.toCharArray()) {
@@ -96,7 +95,10 @@ public class VueConsole {
 
 
     private String cmdLieu(GestionnaireControlleurs gc, String cmd) {
-        return "" ;
+        if (cmd.length() > 5 ) {
+            return gc.getLieu(cmd.substring(5))  ;
+        }
+        return "erreur de saisie";
     }
 
     private String cmdPokemon (GestionnaireControlleurs gc, String nom) {

@@ -103,6 +103,16 @@ public class GestionnaireControlleurs {
 
     public String getLieux () {return "les routes :" + donnees.getListeRoute() ;}
 
+    public String getLieu(String nom) {
+        System.out.println("recherche du lieu par son nom");
+
+        String res = donnees.getLieu(nom) ;
+        if (res == null ) {
+            System.out.println("aucun lieu trouvé");
+        }
+        return res ;
+    }
+
     public String getDresseur(String nom) {
         System.out.println("recherche du dresseur par son nom");
         String res = donnees.getDresseur(nom) ;

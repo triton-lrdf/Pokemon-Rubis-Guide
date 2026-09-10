@@ -8,7 +8,6 @@ public class Lieu {
 
     public Lieu(String nom, Dresseur [] combats ) {
         this.nom = nom; this.combats = combats; ;
-
     }
 
     public String toString() {
@@ -29,6 +28,20 @@ public class Lieu {
             }
         }
         return null ;
+    }
+
+
+    public String getNom() {
+        return nom ;
+    }
+
+    public String getInfos() {
+        StringBuilder result = new StringBuilder(nom + "\n");
+        result.append("Dresseurs : \n");
+        for (Dresseur d : combats) {
+            result.append(d.getInfoRoute()).append("\n");
+        }
+        return result.toString();
     }
 
 

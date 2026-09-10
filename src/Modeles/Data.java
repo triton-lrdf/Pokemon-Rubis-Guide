@@ -10,8 +10,6 @@ public class Data {
     private Lieu[] lieux ;
     private Rencontre[] rencontres;
 
-    // temporaire pour faire des tests
-    private Dresseur[] dresseurs;
 
     public Data(Statement stm) {
         // On repure toutes les infos des pokemons de la generation
@@ -24,20 +22,20 @@ public class Data {
         if (!loadRencontres(stm)) {
             System.out.println("Erreur de lecture des rencontres");
         }
-        if (!loadDresseurs(stm)) {
-            System.out.println("Erreur de lecture des dresseurs");
+        if (!loadLieux(stm)) {
+            System.out.println("Erreur de lecture des lieux");
         }
 
     }
 
     // LES CHARGEMENTS
 
-    public Boolean loadDresseurs( Statement stm) {
+    public Dresseur[] loadDresseurs(int idLieu, Statement stm) {
         try{
 
-            ResultSet res = stm.executeQuery("select count(id) from dresseur ;");
+            ResultSet res = stm.executeQuery("select count(id) from dresseur where lieu = lieu;");
             res.next();
-            dresseurs = new Dresseur[res.getInt(1)] ;
+            Dresseur[] dresseurs = new Dresseur[res.getInt(1)] ;
             res.close();
 
             // l'idée ca va etre de prendre la liste des noms des dresseurs
@@ -74,17 +72,16 @@ public class Data {
                         equipe
                 ) ;
 
-                if (index < dresseurs.length) {
-                    dresseurs[index] = temp;
-                }
+                dresseurs[index] = temp;
                 index++;
 
             }
-            return true ;
+
+            return dresseurs ;
 
         }catch(Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            return null;
         }
     }
 
@@ -116,6 +113,7 @@ public class Data {
                 }
                 index++;
             }
+            res.close();
             return true ;
 
         }catch(Exception e) {
@@ -147,6 +145,7 @@ public class Data {
                 }
                 index++;
             }
+            res.close() ;
             return true ;
 
         }catch(Exception e) {
@@ -157,6 +156,39 @@ public class Data {
     }
 
     private boolean loadLieux(Statement stm) {
+
+        // pour chaque lieux on enregistre ses données temporairement a chaque tour de boucle
+        // on fait evidement la requette du lieux dans la boucle
+        // une fois les data enregistrées on recupere les dresseurs via leur load
+        // ensuite on créé le lieu
+        try {
+
+            ResultSet res = stm.executeQuery("select count(id) from lieu ;");
+            res.next();
+            lieux = new Lieu[res.getInt(1)];
+            res.close();
+            int index = 0;
+
+            while (index < lieux.length) {
+
+                ResultSet infos = stm.executeQuery("select id,nom from lieu where id = " + (index+1) + " ;");
+                infos.next();
+                String nomLieu = infos.getString("nom");
+                int idLieu = infos.getInt("id");
+                infos.close();
+
+                Dresseur[] combats = loadDresseurs(idLieu,stm) ;
+
+                lieux[index] = new Lieu(nomLieu, combats) ;
+
+                index ++ ;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false ;
+        }
+
         return true ;
     }
 
@@ -166,7 +198,7 @@ public class Data {
             ResultSet res  = stm.executeQuery("select count(*) from tauxroutes");
             res.next();
             rencontres = new Rencontre[res.getInt(1)];
-            res = stm.executeQuery("select p.nom, l.nom as lieu, t.niveau, t.taux, t.details from tauxroutes as t join Pokemon as p on idPoke = id join lieu as l on l.id = t.idLieu  order by 2;");
+            res = stm.executeQuery("select p.nom, l.nom as lieu, t.niveau, t.taux, t.details from tauxroutes as t join pokemon as p on idPoke = id join lieu as l on l.id = t.idLieu  order by 2,idpoke;");
             int index = 0;
             while (res.next()) {
 
@@ -181,7 +213,9 @@ public class Data {
                     rencontres[index] = temp;
                 }
                 index++;
+
             }
+            res.close();
             return true ;
 
         }catch(Exception e) {
@@ -191,14 +225,6 @@ public class Data {
     }
 
     // LES RETOURS
-
-    public String[] getCapacites() {
-        String[] res = new String[capacites.length];
-        for (int i = 0; i < capacites.length; i++) {
-            res[i] = capacites[i].getNom();
-        }
-        return res;
-    }
 
     public String getListeRoute() {
         StringBuilder res = new StringBuilder();
@@ -301,11 +327,39 @@ public class Data {
         return null ;
     }
     public String getInfoDresseur() {
+        /*
         StringBuilder res = new StringBuilder();
         for (Dresseur d : dresseurs) {
             res.append(d.toString()).append("\n");
         }
         return  res.toString();
+        */
+        return "" ;
+    }
+
+    public String getPokeRoute(String lieu) {
+        StringBuilder res = new StringBuilder();
+            for (Rencontre r : rencontres) {
+                if (r.isIn(lieu)) {
+                    res.append(r.getInfoRoute()).append("\n");
+                }
+            }
+        return res.toString();
+    }
+
+    public String getLieu(String nom) {
+
+        StringBuilder res = new StringBuilder();
+        for (Lieu l : lieux) {
+            if (l.getNom().equalsIgnoreCase(nom)) {
+                res.append(l.getInfos() );
+                res.append("Pokemon rencontrables : \n");
+                res.append(getPokeRoute(l.getNom())) ;
+                return res.toString() ;
+            }
+        }
+
+        return null;
     }
 
 }
